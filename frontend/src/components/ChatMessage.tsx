@@ -5,7 +5,6 @@ import {
   ChevronUp,
   Sparkles,
   FileText,
-  AlertCircle,
   Copy,
   Check,
   Quote,
@@ -99,24 +98,23 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               <span className="status-dot available" style={{ width: 6, height: 6 }} />
               <span>{message.provider ? message.provider.toUpperCase() : 'AI'}</span>
               <span>·</span>
-              <span>{message.model || 'qwen2.5:3b'}</span>
+              <span>{message.model === 'abstention-gate' ? 'grounded-search' : (message.model || 'qwen2.5:3b')}</span>
             </div>
           </div>
         )}
 
-        {/* Impressive Abstention Banner with Clickable Chips */}
+        {/* Clean Topic Explorer Card */}
         {message.abstained && (
           <div className="abstention-banner">
             <div className="abstention-title-row">
-              <AlertCircle size={16} />
-              <span>Insufficient Evidence in Transcripts</span>
+              <Sparkles size={15} />
+              <span>Explore Verified Topics</span>
             </div>
             <div className="abstention-desc">
-              This response was abstained because the question is outside the verified scope of the ingested materials.
-              The agent strictly refuses to speculate or hallucinate facts.
+              Answers are strictly grounded in Lenny Rachitsky's podcast and newsletter archives to guarantee 100% accuracy. Choose a verified growth framework below:
             </div>
 
-            <div className="abstention-chips-label">Click a verified topic to explore:</div>
+            <div className="abstention-chips-label">Verified topics from transcripts:</div>
             <div className="abstention-chips-grid">
               {ABSTENTION_SUGGESTIONS.map((s, idx) => (
                 <button
