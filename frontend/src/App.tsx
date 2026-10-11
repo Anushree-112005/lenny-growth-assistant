@@ -305,15 +305,35 @@ export const App: React.FC = () => {
                 </div>
               </div>
             ) : (
-              messages.map((m) => (
-                <ChatMessage
-                  key={m.id}
-                  message={m}
-                  onGenerateArtifact={handleGenerateArtifact}
-                  onDraftShip30={() => setIsShip30Open(true)}
-                  onSelectSuggestion={handleSendMessage}
-                />
-              ))
+              <>
+                {messages.map((m) => (
+                  <ChatMessage
+                    key={m.id}
+                    message={m}
+                    onGenerateArtifact={handleGenerateArtifact}
+                    onDraftShip30={() => setIsShip30Open(true)}
+                    onSelectSuggestion={handleSendMessage}
+                  />
+                ))}
+                {isLoading && (
+                  <div className="message-row assistant">
+                    <div className="message-bubble typing-bubble">
+                      <div className="assistant-identity-header">
+                        <div className="assistant-id-badge">
+                          <div className="assistant-avatar">L</div>
+                          <span className="assistant-name">Lenny Growth Intelligence</span>
+                        </div>
+                      </div>
+                      <div className="typing-indicator-row">
+                        <span className="typing-dot" />
+                        <span className="typing-dot" />
+                        <span className="typing-dot" />
+                        <span className="typing-text">Grounding answer in transcript archives...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

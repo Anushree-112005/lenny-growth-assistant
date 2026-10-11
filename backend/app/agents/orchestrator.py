@@ -106,9 +106,9 @@ class GrowthOrchestrator:
             "STRICT GROUNDING INSTRUCTIONS:\n"
             "1. Base your answer strictly on the provided transcript excerpts above.\n"
             "2. Cite your sources directly using the Source title or Doc ID (e.g., [Source: Elena Verna on B2B PLG]).\n"
-            "3. Never invent podcast episode titles, guest quotes, metrics, or source URLs not in the excerpts.\n"
-            "4. Provide clear, structured, and practical growth advice.\n"
-            "5. If the excerpts only partially address the question, be transparent about what is covered and what is not."
+            "3. Keep your response direct, structured, and focused with 2-3 key takeaways and bullet points (around 120-180 words total).\n"
+            "4. Never invent podcast episode titles, guest quotes, metrics, or source URLs not in the excerpts.\n"
+            "5. If the excerpts only partially address the question, be transparent about what is covered."
         )
 
         # Build message history for conversational context (up to last 6 messages)
@@ -135,6 +135,7 @@ class GrowthOrchestrator:
                 messages=llm_messages,
                 system=system_prompt,
                 temperature=0.2,
+                max_tokens=250,
             )
         except Exception as e:
             logger.error(f"Provider call failed: {e}")
